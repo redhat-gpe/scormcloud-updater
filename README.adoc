@@ -1,0 +1,61 @@
+=== scormcloud-updater
+
+Makes API calls to the designated SCORMCLOUD account allowing updates of student records. Could easily be exteded for other related purposes.
+
+=== Requirements
+
+None
+
+=== Role Variables
+
+Role variables can be divide into 2 types SCORMCLOUD endpoint and credentails and SCORMCLOUD Payload data
+
+----
+scormcloud_api_endpoint:      https://cloud.scorm.com/lrs/<YOUR-SCORMCLOUD-DETAILS>/data/xAPI/statements
+scormcloud_key:               <YOUR-SCORMCLOUD-KEY>
+scormcloud_secret:            <YOUR-SCORMCLOUD-SECRET>
+----
+
+----
+opentlc_course_name:          Ansible Advanced
+opentlc_lab_id:               "03_01"
+----
+
+=== Dependencies
+
+No dependedencies
+
+Example Playbook
+----------------
+
+Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+
+----
+
+---
+- name: Update SCORMCloud with student lab status
+  hosts:          localhost
+  connection:     local
+  gather_facts:   false
+  become:         false
+  vars:
+    scormcloud_api_endpoint:      https://cloud.scorm.com/lrs/<YOUR-SCORMCLOUD-DETAILS>/data/xAPI/statements
+    scormcloud_key:               <YOUR-SCORMCLOUD-KEY>
+    scormcloud_secret:            <YOUR-SCORMCLOUD-SECRET>
+    opentlc_course_name:          Ansible Advanced 
+    opentlc_lab_id:               "03_01"
+
+
+  roles:
+    - scormcloud_updater
+...
+
+----
+
+=== License
+
+GPL3
+
+=== Author Information
+
+Author: Tony Kay tok@redhat.com

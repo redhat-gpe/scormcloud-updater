@@ -1,0 +1,4 @@
+---
+scormcloud_auth_composite:    "{{ scormcloud_key }}:{{ scormcloud_secret }}"
+scormcloud_auth:              "{{ scormcloud_auth_composite | b64encode }}"
+...
