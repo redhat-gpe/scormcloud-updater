@@ -1,0 +1,19 @@
+---
+- name: Update student status SCORMCloud
+  uri:
+    url:                "{{ scormcloud_api_endpoint }}"
+    method:             POST
+    body_format:        json
+    body:               "{{ lookup('template', 'update_lab_completion.j2') }}"
+    return_content:     yes
+    headers:
+      Authorization: "Basic {{ scormcloud_auth }}"
+      X-Experience-API-Version: 1.0.1
+      Content-Type: application/json
+  register: r_scormcloud_api_call
+
+- name: 'DEBUG: Output SCORMCloud Response'
+  debug:
+    var:          r_scormcloud_api_call
+    verbosity:    2
+...
