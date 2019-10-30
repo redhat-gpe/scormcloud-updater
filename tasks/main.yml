@@ -1,13 +1,13 @@
 ---
-- name: Call SCORMCLOUD API
+- name: Call SCORMCloud API
   uri:
     url:                "{{ scormcloud_api_endpoint }}"
     method:             "{{ scormcloud_api_method | default('POST') }}"
     body_format:        "{{ scormcloud_api_body_format | default('json') }}"
-    body:               "{{ scormcloud_body_payload }}"
+    body:               "{{ scormcloud_api_body }}"
     return_content:     yes
     headers:
-      Authorization: "Basic {{ scormcloud_auth }}"
+      Authorization: "Basic {{ scormcloud_api_auth }}"
       X-Experience-API-Version: 1.0.1
       Content-Type: application/json
   register: r_scormcloud_api_call

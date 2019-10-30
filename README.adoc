@@ -1,6 +1,8 @@
 === scormcloud-updater
 
-Makes API calls to the designated SCORMCLOUD account allowing updates of student records. Could easily be exteded for other related purposes.
+Makes API calls to the designated SCORMCloud account originally for allowing
+updates of student records however can be used to interact with the SCORMCloud 
+API for other purposes.
 
 === Requirements
 
@@ -8,22 +10,54 @@ None
 
 === Role Variables
 
-Role variables can be divide into 2 types SCORMCLOUD endpoint and credentails and SCORMCLOUD Payload data
+Role variables can be divide into 2 types SCORMCloud endpoint and credentials and SCORMCloud Payload data
 
 ----
 scormcloud_api_endpoint:      https://cloud.scorm.com/lrs/<YOUR-SCORMCLOUD-DETAILS>/data/xAPI/statements
-scormcloud_key:               <YOUR-SCORMCLOUD-KEY>
-scormcloud_secret:            <YOUR-SCORMCLOUD-SECRET>
+scormcloud_api_key:           <YOUR-SCORMCLOUD-KEY>
+scormcloud_api_secret:        <YOUR-SCORMCLOUD-SECRET>
+
+# Optional variables 
+
+scormcloud_api_body_format: form-urlencoded     # Defaults to json 
+scormcloud_api_method:      GET                 # Defaults to POST
 ----
 
+Sample payload data. The entire payload body is expressed as a YAML dictionary
+though the original templated version of the body component is included, but not
+used (see link:./templates/update_lab_completion.j2[update_lab_completion.j2] ).
+The role was originally written to update student records and this is reflected
+in the yaml dictionary below.
+
+
 ----
-opentlc_course_name:          Ansible Advanced
-opentlc_lab_id:               "03_01"
+scormcloud_api_body
+  actor:
+    account:
+      name:         tok-opentlc-id
+      homePage:     "http://redhat.gpte.com/lab_grading"
+    objectType:  Agent
+  verb:
+    id:   "http://adlnet.gov/expapi/verbs/attempted"
+    display:
+      en-US:        Attempted Ansible Implementation Lab
+      lab-id:       03-01
+  object:
+    id:   "http://adlnet.gov/expapi/verbs/attempted"
+    definition:
+      name:
+        en-US:       Ansible Implementation
+    objectType:   Activity
+  result:
+    success:    True
+    response:   Well done lab completed successfully
+...
+
 ----
 
 === Dependencies
 
-No dependedencies
+No dependencies
 
 Example Playbook
 ----------------
@@ -40,11 +74,28 @@ Including an example of how to use your role (for instance, with variables passe
   become:         false
   vars:
     scormcloud_api_endpoint:      https://cloud.scorm.com/lrs/<YOUR-SCORMCLOUD-DETAILS>/data/xAPI/statements
-    scormcloud_key:               <YOUR-SCORMCLOUD-KEY>
-    scormcloud_secret:            <YOUR-SCORMCLOUD-SECRET>
-    opentlc_course_name:          Ansible Advanced 
-    opentlc_lab_id:               "03_01"
-
+    scormcloud_api_key:           <YOUR-SCORMCLOUD-KEY>
+    scormcloud_api_secret:        <YOUR-SCORMCLOUD-SECRET>
+    scormcloud_api_body:
+      actor:
+        account: 
+          name:         tok-opentlc-id
+          homePage:     "http://what-page-here.com"
+        objectType:  Agent 
+      verb:  
+        id:   "http://adlnet.gov/expapi/verbs/attempted"
+        display:
+          en-US:        Not quite sure what goes here
+          lab-id:       Lab ID here
+      object:        
+        id:   "http://adlnet.gov/expapi/verbs/attempted"
+        definition: 
+          name:
+            en-US:        Course Name
+        objectType:   Activity
+      result:    
+        success:    True
+        response:   Well done
 
   roles:
     - scormcloud_updater
