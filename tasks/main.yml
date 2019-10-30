@@ -4,7 +4,8 @@
     url:                "{{ scormcloud_api_endpoint }}"
     method:             POST
     body_format:        json
-    body:               "{{ lookup('template', 'update_lab_completion.j2') }}"
+    #body:               "{{ lookup('template', 'update_lab_completion.j2') }}"
+    body:               "{{ scormcloud_body_payload }}"
     return_content:     yes
     headers:
       Authorization: "Basic {{ scormcloud_auth }}"
