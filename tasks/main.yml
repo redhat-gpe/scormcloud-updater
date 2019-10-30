@@ -1,10 +1,9 @@
 ---
-- name: Update student status SCORMCloud
+- name: Call SCORMCLOUD API
   uri:
     url:                "{{ scormcloud_api_endpoint }}"
-    method:             POST
-    body_format:        json
-    #body:               "{{ lookup('template', 'update_lab_completion.j2') }}"
+    method:             "{{ scormcloud_api_method | default('POST') }}"
+    body_format:        "{{ scormcloud_api_body_format | default('json') }}"
     body:               "{{ scormcloud_body_payload }}"
     return_content:     yes
     headers:
