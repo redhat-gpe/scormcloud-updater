@@ -78,27 +78,27 @@ Including an example of how to use your role (for instance, with variables passe
     scormcloud_api_secret:        <YOUR-SCORMCLOUD-SECRET>
     scormcloud_api_body:
       actor:
-        account: 
+        account:
           name:         tok-opentlc-id
           homePage:     "http://what-page-here.com"
-        objectType:  Agent 
-      verb:  
+        objectType:  Agent
+      verb:
         id:   "http://adlnet.gov/expapi/verbs/attempted"
         display:
           en-US:        Not quite sure what goes here
           lab-id:       Lab ID here
-      object:        
+      object:
         id:   "http://adlnet.gov/expapi/verbs/attempted"
-        definition: 
+        definition:
           name:
             en-US:        Course Name
         objectType:   Activity
-      result:    
+      result:
         success:    True
         response:   Well done
 
   roles:
-    - scormcloud_updater
+    - scormcloud-updater
 ...
 
 ----
