@@ -1,0 +1,12 @@
+galaxy_info:
+  author: Tony Kay tok @ red hat . com
+  description: Ansible role for talking to scormcloud via xAPI
+  company: Red Hat
+
+  license: license (GPL-2.0-or-later, MIT, etc)
+
+  min_ansible_version: 2.4
+
+  galaxy_tags: []
+
+dependencies: []
