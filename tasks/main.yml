@@ -1,4 +1,12 @@
 ---
+- name: 'DEBUG: Custom creds'
+  debug:
+    msg:
+      - "scormcloud_api_key is {{ scormcloud_api_key }}"
+      - "scormcloud_api_secret is {{ ct scormcloud_api_secret }}"
+      - "scormcloud_auth_composite is {{ scormcloud_auth_composite }}"
+      - "scormcloud_api_auth {{ scormcloud_api_auth }}"
+
 - name: Call SCORMCloud API
   uri:
     url:                "{{ scormcloud_api_endpoint }}"
