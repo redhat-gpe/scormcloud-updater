@@ -1,12 +1,14 @@
 ---
-- name: Setup API call creds
+- when: scormcloud_api_key | default(false)
+  name: Setup API call creds
   set_fact:
-    scormcloud_auth_composite:    "{{ scormcloud_api_key }}:{{ scormcloud_api_secret }}"
+    scormcloud_auth_composite: "{{ scormcloud_api_key }}:{{ scormcloud_api_secret }}"
     #  no_log: true
 
-- name: Setup API call creds
+- when: scormcloud_api_key | default(false)
+  name: Setup API call creds
   set_fact:
-    scormcloud_api_auth:          "{{ scormcloud_auth_composite | b64encode }}"
+    scormcloud_api_auth: "{{ scormcloud_auth_composite | b64encode }}"
     #no_log: true
 
 #- name: 'DEBUG: API call creds'
