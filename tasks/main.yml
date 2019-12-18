@@ -23,7 +23,7 @@
       X-Experience-API-Version: 1.0.1
       Content-Type: application/json
   register: r_scormcloud_api_call
-  no_log: true
+  #  no_log: true
 
 - name: 'DEBUG: Output SCORMCloud Response'
   debug:
