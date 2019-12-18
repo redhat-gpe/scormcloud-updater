@@ -3,21 +3,13 @@
   name: Setup API call creds
   set_fact:
     scormcloud_auth_composite: "{{ scormcloud_api_key }}:{{ scormcloud_api_secret }}"
-    #  no_log: true
+  no_log: true
 
 - when: scormcloud_api_key | default(false)
   name: Setup API call creds
   set_fact:
     scormcloud_api_auth: "{{ scormcloud_auth_composite | b64encode }}"
-    #no_log: true
-
-#- name: 'DEBUG: API call creds'
-#  debug:
-#    msg: "scormcloud_auth_composite is {{ scormcloud_auth_composite }}"
-#
-#- name: 'DEBUG: API call creds'
-#  debug:
-#    msg: "scormcloud_api_auth is {{ scormcloud_api_auth }}"
+  no_log: true
 
 - name: Call SCORMCloud API
   uri:
@@ -31,7 +23,7 @@
       X-Experience-API-Version: 1.0.1
       Content-Type: application/json
   register: r_scormcloud_api_call
-  # no_log: true
+  no_log: true
 
 - name: 'DEBUG: Output SCORMCloud Response'
   debug:
